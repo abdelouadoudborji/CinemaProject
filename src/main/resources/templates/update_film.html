@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Ajouter une cinema</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="../categorie/categorieList">Categorie </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../cinema/cinemaList">Cinema</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../film/filmList">Film<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../salle/salleList">Salle</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../ville/villeList">Ville</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+<body>
+    <div class="container my-5">
+        <h3> Ajputer un film</h3>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-10">
+                    <form action="#" th:action="@{/film/update/{id}(id=${film.id})}" th:object="${film}" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="titre" class="col-form-label">Titre</label> <input type="text" th:field="*{titre}" class="form-control" id="titre" placeholder="titre"> <span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="decription" class="col-form-label">decription</label> <input type="text" th:field="*{decription}" class="form-control" id="decription" placeholder="decription"> <span th:if="${#fields.hasErrors('decription')}" th:errors="*{decription}" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-8">
+                                <label for="realisateur" class="col-form-label">realisateur</label> <input type="text" th:field="*{realisateur}" class="form-control" id="realisateur" placeholder="realisateur"> <span th:if="${#fields.hasErrors('realisateur')}" th:errors="*{realisateur}" class="text-danger"></span>
+                            </div>
+                              <div class="form-group col-md-8">
+                                <label for="dateSortie" class="col-form-label">dateSortie</label> <input type="date" th:field="*{dateSortie}" class="form-control" id="dateSortie" placeholder="dateSortie"> <span th:if="${#fields.hasErrors('dateSortie')}" th:errors="*{dateSortie}" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="duree" class="col-form-label">duree</label> <input type="text" th:field="*{duree}" class="form-control" id="duree" placeholder="duree"> <span th:if="${#fields.hasErrors('duree')}" th:errors="*{duree}" class="text-danger"></span>
+                            </div>
+                             <div class="form-group col-md-8">
+                             <div class="container">
+  <div class="row">
+    <div class="col">
+  File to upload:  <input th:object="${myUploadForm}"  th:field="*{fileDatas}" type="file"/>
+    </div>
+    <div class="col">
+    <img th:src="${path+film.photo}" style="width:100px;height:100px;">
+    </div>
+  </div>
+  
+</div>
+                              
+                              
+                              </div>
+                             <div class="form-group col-md-8">
+                                <label for="categorie_id" class="col-form-label">Categorie</label>
+                                 <select th:field="*{categorie.id}">
+                                 <option th:value="${film.categorie.id}" th:text="${film.categorie.name}"></option>
+                                 <option th:each="v:${listville}" th:value="${v.id}" th:text="${v.name}"></option>                                                                                    
+                                 </select>
+
+                            </div>
+                            
+                             </div>
+
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-primary" value="Add Ville">
+                            </div>
+
+                            <div class="form-group col-md-8"></div>
+
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

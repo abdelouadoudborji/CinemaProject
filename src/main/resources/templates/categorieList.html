@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="../categorie/categorieList">Categorie <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../cinema/cinemaList">Cinema</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../film/filmList">Film</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../salle/salleList">Salle</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../ville/villeList">Ville</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+<body>
+<div class="m-5">
+<div class="card">
+<div class="card-header">
+<p>
+Liste des Categories
+</p>
+
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+     <form method="get" th:action="patient">
+<div class="from-group">
+<label>
+Nom:
+</label>
+<input type="text" name="keyword" th:value="${keyword}">
+<button class="btn btn-success">chercher</button>
+
+ 
+</div>
+
+
+</form>
+    </div>
+    <div class="col">
+     
+                        <a href="/categorie/add_categorie" class="btn btn-success" style="margin-right:'50px'"><i
+       class="fas fa-user-plus ml-2"> Ajouter une Categorie</i></a>
+                   
+    </div>
+   
+  </div>
+</div>
+
+<div class="card-body">
+
+<table class="table">
+<tr>
+<th>Id</th>
+<th>Nom</th>
+
+
+<th>Edit</th>
+<th>Delete</th>
+</tr>
+<tr th:each="v:${listPatients}">
+<th th:text="${v.id}"></th>
+<th th:text="${v.name}"></th>
+
+<td><a th:href="@{/categorie/edit/{id}(id=${v.id})}" class="btn btn-success"><i class="fas fa-user-edit ml-2"></i></a></td>
+<td><a th:href="@{/categorie/delete/{id}(id=${v.id})}" class="btn btn-success"><i class="fas fa-user-times ml-2"></i></a></td>
+</tr>
+</table>
+<ul class="nav nav-pills">
+<li th:each="page,status:${pages}">
+<a th:class="@{status.index==currentpage?'btn btn-primary':'btn'}"
+ th:href="@{patient(page=${status.index})}"   th:text="${status.index}"></a>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>
